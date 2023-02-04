@@ -22,11 +22,11 @@ public class PlayerMovement : MonoBehaviour
         //flips player
         if (horizontalInput>0.01f)
         {
-            transform.localScale = new Vector3(0.2f,0.2f,0);
+            transform.localScale = new Vector3(-0.2f,0.2f,0);
         }
         else if(horizontalInput< -0.01f)
         {
-            transform.localScale = new Vector3(-0.2f, 0.2f, 0);
+            transform.localScale = new Vector3(0.2f, 0.2f, 0);
         }
 
         if (Input.GetKey(KeyCode.Space))
