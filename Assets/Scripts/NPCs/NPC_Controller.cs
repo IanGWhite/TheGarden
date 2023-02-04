@@ -6,25 +6,16 @@ public class NPC_Controller : MonoBehaviour
 {
     public bool isTalking;
     public Animator animator;
+    [SerializeField] private GameObject dialogue;
     // Start is called before the first frame update
-    void Start()
+
+    public void ActivateDialogue()
     {
-        
+        dialogue.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool DialogueActive()
     {
-        
-    }
-
-    public void talkToNPC()
-    {
-        if (!isTalking)
-        {
-            isTalking = true;
-            Debug.Log("NPC is now talking");
-        }
-
+        return dialogue.activeInHierarchy;
     }
 }

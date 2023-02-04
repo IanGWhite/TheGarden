@@ -5,10 +5,21 @@ namespace DialogueSystem
 {
     public class DialogueHolder : MonoBehaviour
     {
-        private void Awake()
+        IEnumerator dialogueSeq;
+        private void OnEnable()
         {
-            StartCoroutine(dialogueSequence());
+            dialogueSeq = dialogueSequence();
+            StartCoroutine(dialogueSeq);
         }
+
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.Backspace)) //valid key code?
+            {
+                Deactivate();
+                gameObject.SetActive(false);
+                StopCoroutine(dialogueSeq);
+            }
 
         private IEnumerator dialogueSequence()
         {

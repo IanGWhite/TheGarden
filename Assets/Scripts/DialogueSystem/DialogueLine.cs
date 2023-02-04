@@ -8,7 +8,7 @@ namespace DialogueSystem
     {
         private Text textHolder;
 
-        [Header ("Text Options")]
+        [Header("Text Options")]
         [SerializeField] private string input;
         [SerializeField] private Color textColor;
         [SerializeField] private Font textFont;
@@ -24,18 +24,43 @@ namespace DialogueSystem
         //[SerializeField] private Sprite characterSprite;
         //[SerializeField] private Image imageHolder;
 
+        private IEnumerator lineAppear;
+
         private void Awake()
         {
             textHolder = GetComponent<Text>();
             textHolder.text = "";
 
-           // imageHolder.sprite = characterSprite;
-           // imageHolder.preserveAspect = true;
+            // imageHolder.sprite = characterSprite;
+            // imageHolder.preserveAspect = true;
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            StartCoroutine(WriteText(input, textHolder, textColor, textFont, delay, delayBetweenLines));
+            ResetLine();
+            lineAppear = WriteText(input, textHolder, textColor, textFont, delay, delayBetweenLines);
+            StartCoroutine(lineAppear);
+        }
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (textHolder.text != input)
+                {
+                    StopCoroutine(lineAppear);
+                    textHolder.text = input;
+                }
+                else
+                    finished = true;
+            }
+        }
+
+        private void ResetLine()
+        {
+            textHolder = GetComponent<textHolder>();
+            textHolder.text = "";
+            finished = false;
         }
     }
 }
