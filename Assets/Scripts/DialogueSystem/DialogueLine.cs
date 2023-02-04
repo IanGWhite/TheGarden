@@ -37,7 +37,7 @@ namespace DialogueSystem
 
         private void OnEnable()
         {
-            ResetLine();
+            //ResetLine();
             lineAppear = WriteText(input, textHolder, textColor, textFont, delay, delayBetweenLines);
             StartCoroutine(lineAppear);
         }
@@ -56,11 +56,11 @@ namespace DialogueSystem
             }
         }
 
-        private void ResetLine()
+/*        private void ResetLine()
         {
             textHolder = GetComponent<textHolder>();
             textHolder.text = "";
             finished = false;
-        }
+        }*/
     }
 }

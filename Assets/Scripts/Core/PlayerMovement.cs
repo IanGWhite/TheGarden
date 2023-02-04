@@ -5,18 +5,22 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]private float speed;
+    [SerializeField] public float speed;
     private Rigidbody2D body;
     private NPC_Controller npc;
+    private Animator anim;
+    private bool inDialogue;
+    private bool isRight;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (!inDialogue())
+        if (!inDialogue)
         {
             float horizontalInput = Input.GetAxis("Horizontal");
             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
@@ -25,21 +29,28 @@ public class PlayerMovement : MonoBehaviour
             //flips player
             if (horizontalInput > 0.01f)
             {
-                transform.localScale = new Vector3(-0.2f, 0.2f, 0);
+                transform.localScale = new Vector3(-80.2f, 80.2f, 0);
+                isRight = true;
             }
             else if (horizontalInput < -0.01f)
             {
-                transform.localScale = new Vector3(0.2f, 0.2f, 0);
+                transform.localScale = new Vector3(80.2f, 80.2f, 0);
+                isRight = false;
             }
 
             if (Input.GetKey(KeyCode.Space))
             {
-                body.velocity = new Vector2(body.velocity.x, speed);
+                body.velocity = new Vector2(body.velocity.x * 2, 40);
             }
+               
+            anim.SetBool("run", horizontalInput != 0);
+
+            if (isRight)
+                anim.SetBool("isRight", horizontalInput != 0);
         }
     }
-    
-    private Boolean inDialogue()
+
+    private bool InDialogue()
     {
         if (npc != null)
             return npc.DialogueActive();
@@ -49,10 +60,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "NPC")
+        if (collision.gameObject.tag == "NPC")
         {
             npc = collision.gameObject.GetComponent<NPC_Controller>();
-            if(Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.E))
             {
                 Debug.Log("Player in range");
                 npc.ActivateDialogue();
