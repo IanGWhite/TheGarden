@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class NPC_Controller : MonoBehaviour
 {
-    public bool isTalking;
     public Animator animator;
     [SerializeField] private GameObject dialogue;
-    // Start is called before the first frame update
+
+    private void Start()
+    {
+        Debug.Log("Activated");
+        dialogue.SetActive(false);
+    }
 
     public void ActivateDialogue()
     {

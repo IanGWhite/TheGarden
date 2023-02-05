@@ -14,7 +14,7 @@ public class Interactable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(proximityTrigger.ToString());
+
     }
 
     // Update is called once per frame
@@ -22,6 +22,7 @@ public class Interactable : MonoBehaviour
     {
         if (isInRange)
         {
+            Debug.Log("In range triggered");
             if(Input.GetKeyDown(interactKey))
             {
                 interactAction.Invoke();

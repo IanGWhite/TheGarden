@@ -31,8 +31,6 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
         }
 
-
-
         //flips player
         if (horizontalInput > 0.01f)
         {
@@ -59,23 +57,21 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("isRun", horizontalInput != 0);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+/*    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "NPC")
         {
+            Debug.Log("Interacted");
             npc = collision.gameObject.GetComponent<NPC_Controller>();
+
             if (Input.GetKey(KeyCode.E))
-            {
-                Debug.Log("Player in range");
                 npc.ActivateDialogue();
-            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         npc = null;
-    }
-
+    }*/
 
 }
