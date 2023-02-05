@@ -36,13 +36,13 @@ public class PlayerMovement : MonoBehaviour
         //flips player
         if (horizontalInput > 0.01f)
         {
-            transform.localScale = new Vector3(-0.4f, 0.4f, 0);
-            isRight = true;
+            transform.localScale = new Vector3(-24.4f, 24.4f, 0);
+            isRight = false;
         }
         else if (horizontalInput < -0.01f)
         {
-            transform.localScale = new Vector3(0.4f, 0.4f, 0);
-            isRight = false;
+            transform.localScale = new Vector3(24.4f, 24.4f, 0);
+            isRight = true;
         }
 
         if (Input.GetKey(KeyCode.Space))

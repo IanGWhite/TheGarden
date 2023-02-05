@@ -1,21 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 namespace DialogueSystem
 {
     public class DialogueHolder : MonoBehaviour
     {
-        IEnumerator dialogueSeq;
-
-        void Deactivate()
+        private void Awake()
         {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                transform.GetChild(i).gameObject.SetActive(false);
-            }
+            StartCoroutine(dialogueSequence());
         }
 
-        IEnumerator dialogueSequence()
+        private IEnumerator dialogueSequence()
         {
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -26,21 +21,12 @@ namespace DialogueSystem
             gameObject.SetActive(false);
         }
 
-        private void OnEnable()
+        private void Deactivate()
         {
-            dialogueSeq = dialogueSequence();
-            StartCoroutine(dialogueSeq);
-        }
-
-        private void Update()
-        {
-            if (Input.GetKey(KeyCode.Backspace)) //valid key code?
+            for (int i = 0; i < transform.childCount; i++)
             {
-                Deactivate();
-                gameObject.SetActive(false);
-                StopCoroutine(dialogueSeq);
+                transform.GetChild(i).gameObject.SetActive(false);
             }
-
         }
     }
 }
